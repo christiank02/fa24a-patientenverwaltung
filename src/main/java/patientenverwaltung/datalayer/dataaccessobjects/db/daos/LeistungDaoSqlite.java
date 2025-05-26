@@ -15,61 +15,72 @@ public class LeistungDaoSqlite extends AbstractDaoSqlite<Leistung, String> {
 
     @Override
     protected String getTableName() {
-        return "";
+        return "leistung";
     }
 
     @Override
     protected String getPrimaryKeyColumn() {
-        return "";
+        return "lkNr";
     }
 
     @Override
     protected String getSqlCreateTableIfNotExists() {
-        return "";
+        return "CREATE TABLE IF NOT EXISTS leistung (" +
+               "lkNr TEXT PRIMARY KEY," +
+               "bezeichnung TEXT NOT NULL," +
+               "beschreibung TEXT" +
+               ")";
     }
 
     @Override
     protected String getSqlInsert() {
-        return "";
+        return "INSERT INTO leistung (lkNr, bezeichnung, beschreibung) VALUES (?, ?, ?)";
     }
 
     @Override
     protected String getSqlUpdate() {
-        return "";
+        return "UPDATE leistung SET bezeichnung = ?, beschreibung = ? WHERE lkNr = ?";
     }
 
     @Override
     protected String getSqlReadId() {
-        return "";
+        return "SELECT * FROM leistung WHERE lkNr = ?";
     }
 
     @Override
     protected String getSqlReadAll() {
-        return "";
+        return "SELECT * FROM leistung";
     }
 
     @Override
     protected String getSqlDelete() {
-        return "";
+        return "DELETE FROM leistung WHERE lkNr = ?";
     }
 
     @Override
     protected Leistung mapResultSetToObject(ResultSet resultSet) throws SQLException {
-        return null;
+        Leistung leistung = new Leistung();
+        leistung.setLkNr(resultSet.getString("lkNr"));
+        leistung.setBezeichnung(resultSet.getString("bezeichnung"));
+        leistung.setBeschreibung(resultSet.getString("beschreibung"));
+        return leistung;
     }
 
     @Override
     protected void setInsertStatement(PreparedStatement preparedStatement, Leistung objectToInsert) throws SQLException {
-
+        preparedStatement.setString(1, objectToInsert.getLkNr());
+        preparedStatement.setString(2, objectToInsert.getBezeichnung());
+        preparedStatement.setString(3, objectToInsert.getBeschreibung());
     }
 
     @Override
     protected void setGeneratedIdToObject(PreparedStatement preparedStatement, Leistung objectToInsert) throws SQLException {
-
     }
 
     @Override
     protected void setUpdateStatement(PreparedStatement preparedStatement, Leistung objectToUpdate) throws SQLException {
-
+        preparedStatement.setString(1, objectToUpdate.getBezeichnung());
+        preparedStatement.setString(2, objectToUpdate.getBeschreibung());
+        preparedStatement.setString(3, objectToUpdate.getLkNr());
     }
 }
