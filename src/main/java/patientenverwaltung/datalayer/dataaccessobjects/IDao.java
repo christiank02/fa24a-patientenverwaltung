@@ -4,7 +4,7 @@ import java.util.List;
 
 import patientenverwaltung.datalayer.exceptions.DaoException;
 
-public interface Dao<T, ID> {
+public interface IDao<T, ID> {
 
     T create();
     T create(T objectToInsert) throws DaoException;

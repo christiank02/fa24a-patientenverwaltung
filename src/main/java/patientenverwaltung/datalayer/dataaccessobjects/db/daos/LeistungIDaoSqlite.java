@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import patientenverwaltung.datalayer.exceptions.DaoException;
 import patientenverwaltung.models.Leistung;
 
-public class LeistungDaoSqlite extends AbstractDaoSqlite<Leistung, String> {
+public class LeistungIDaoSqlite extends AbstractIDaoSqlite<Leistung, String> {
 
-    public LeistungDaoSqlite(String url) throws DaoException {
+    public LeistungIDaoSqlite(String url) throws DaoException {
         super(url);
     }
 

@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import patientenverwaltung.datalayer.dataaccessobjects.Dao;
+import patientenverwaltung.datalayer.dataaccessobjects.IDao;
 import patientenverwaltung.datalayer.dataaccessobjects.file.services.FilePersistenceService;
 import patientenverwaltung.datalayer.exceptions.DaoException;
 
-public abstract class AbstractDaoFile<T, ID> implements Dao<T, ID> {
+public abstract class AbstractIDaoFile<T, ID> implements IDao<T, ID> {
 
     protected final FilePersistenceService<T> filePersistenceService;
     protected final Class<T> objectType;
     protected final Path filePath;
     protected List<T> cachedObjectList;
 
-    public AbstractDaoFile(FilePersistenceService<T> filePersistenceService, Class<T> objectType, Path filePath) {
+    public AbstractIDaoFile(FilePersistenceService<T> filePersistenceService, Class<T> objectType, Path filePath) {
         this.filePersistenceService = filePersistenceService;
         this.objectType = objectType;
         this.filePath = filePath;

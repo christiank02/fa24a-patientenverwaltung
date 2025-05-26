@@ -8,16 +8,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import patientenverwaltung.datalayer.dataaccessobjects.Dao;
+import patientenverwaltung.datalayer.dataaccessobjects.IDao;
 import patientenverwaltung.datalayer.dataaccessobjects.db.services.ConnectionManager;
 import patientenverwaltung.datalayer.dataaccessobjects.db.services.ConnectionManagerSqlite;
 import patientenverwaltung.datalayer.exceptions.DaoException;
 
-public abstract class AbstractDaoSqlite<T, ID> implements Dao<T, ID> {
+public abstract class AbstractIDaoSqlite<T, ID> implements IDao<T, ID> {
 
     protected final ConnectionManager connectionManager;
 
-    public AbstractDaoSqlite(String url) throws DaoException {
+    public AbstractIDaoSqlite(String url) throws DaoException {
         this.connectionManager = new ConnectionManagerSqlite(url);
         createTableIfNotExists();
     }

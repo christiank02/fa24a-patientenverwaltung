@@ -4,9 +4,9 @@ import java.nio.file.Path;
 import patientenverwaltung.datalayer.dataaccessobjects.file.services.FilePersistenceService;
 import patientenverwaltung.models.Patient;
 
-public class PatientDaoFile extends AbstractDaoFile<Patient, Long> {
+public class PatientIDaoFile extends AbstractIDaoFile<Patient, Long> {
 
-    public PatientDaoFile(FilePersistenceService<Patient> filePersistenceService, Path filePath) {
+    public PatientIDaoFile(FilePersistenceService<Patient> filePersistenceService, Path filePath) {
         super(filePersistenceService, Patient.class, filePath);
     }
 

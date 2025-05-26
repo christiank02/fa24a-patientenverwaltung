@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import patientenverwaltung.datalayer.exceptions.DaoException;
 import patientenverwaltung.models.Patient;
 
-public class PatientDaoSqlite extends AbstractDaoSqlite<Patient, Long> {
+public class PatientIDaoSqlite extends AbstractIDaoSqlite<Patient, Long> {
 
-    public PatientDaoSqlite(String url) throws DaoException {
+    public PatientIDaoSqlite(String url) throws DaoException {
         super(url);
     }
 
