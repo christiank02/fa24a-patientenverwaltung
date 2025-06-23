@@ -1,10 +1,32 @@
 package patientenverwaltung.models;
 
+import com.opencsv.bean.CsvBindByName;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "pflegekraft")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "pflegekraft", propOrder = {"id", "vorname", "nachname", "telefon"})
 public class Pflegekraft {
 
+    @XmlElement(name = "id")
+    @CsvBindByName(column = "id")
     private long id;
+
+    @XmlElement(name = "vorname")
+    @CsvBindByName(column = "vorname")
     private String vorname;
+
+    @XmlElement(name = "nachname")
+    @CsvBindByName(column = "nachname")
     private String nachname;
+
+    @XmlElement(name = "telefon")
+    @CsvBindByName(column = "telefon")
     private String telefon;
 
     public Pflegekraft() {}
