@@ -6,7 +6,6 @@ import patientenverwaltung.configuration.models.Configuration;
 import patientenverwaltung.configuration.models.DataSource;
 import patientenverwaltung.configuration.models.DataSources;
 import patientenverwaltung.configuration.models.dbconnection.DbConnection;
-import patientenverwaltung.configuration.models.dbconnection.DbConnectionType;
 import patientenverwaltung.configuration.models.dbconnection.DbConnections;
 import patientenverwaltung.configuration.models.enums.ConnectionType;
 import patientenverwaltung.configuration.models.enums.FileType;
@@ -15,15 +14,18 @@ import patientenverwaltung.configuration.models.fileconnection.File;
 import patientenverwaltung.configuration.models.fileconnection.FileConnection;
 import patientenverwaltung.configuration.models.fileconnection.FileConnections;
 import patientenverwaltung.datalayer.dataaccessobjects.IDao;
+import patientenverwaltung.datalayer.dataaccessobjects.db.daos.AbstractDaoSqlite;
 import patientenverwaltung.datalayer.dataaccessobjects.db.daos.LeistungDaoSqlite;
-import patientenverwaltung.datalayer.dataaccessobjects.file.daos.LeistungDaoFile;
+import patientenverwaltung.datalayer.dataaccessobjects.db.daos.PatientDaoSqlite;
+import patientenverwaltung.datalayer.dataaccessobjects.db.daos.PflegekraftDaoSqlite;
+import patientenverwaltung.datalayer.dataaccessobjects.file.daos.AbstractDaoFile;
 import patientenverwaltung.datalayer.exceptions.DaoException;
 
 public class DataLayerFactory {
 
     private static Configuration config;
 
-    public static IDataLayer createDataLayer(Configuration configuration) {
+    public static IDataLayer createDataLayer(Configuration configuration) throws DaoException {
         config = configuration;
 
         DataLayer dataLayer = new DataLayer();
@@ -34,7 +36,7 @@ public class DataLayerFactory {
         return dataLayer;
     }
 
-    private static <T, ID> IDao<T, ID> createDao(ModelType modelType) {
+    private static <T, ID> IDao<T, ID> createDao(ModelType modelType) throws DaoException {
         DataSource dataSource = getDataSource(modelType);
 
         return switch (dataSource.getSource()) {
@@ -49,47 +51,44 @@ public class DataLayerFactory {
         switch (modelType) {
             case LEISTUNG -> {
                 if (dbConnection.getType() == ConnectionType.SQLITE) {
-                } else {
-                    throw new IllegalArgumentException("Unsupported DB connection type for LEISTUNG: " + dbConnection.getType());
+                    return (AbstractDaoSqlite<T, ID>) new LeistungDaoSqlite(dbConnection.getUrl());
                 }
+
+                throw new DaoException("Unsupported DB connection type for LEISTUNG: " + dbConnection.getType());
             }
             case PFLEGEKRAFT -> {
-                return new PflegekraftDao(dbConnection);
+                if (dbConnection.getType() == ConnectionType.SQLITE) {
+                    return (AbstractDaoSqlite<T, ID>) new PflegekraftDaoSqlite(dbConnection.getUrl());
+                }
+
+                throw new DaoException("Unsupported DB connection type for PFLEGEKRAFT: " + dbConnection.getType());
             }
             case PATIENT -> {
-                return new PatientDao(dbConnection);
+                if (dbConnection.getType() == ConnectionType.SQLITE) {
+                    return (AbstractDaoSqlite<T, ID>) new PatientDaoSqlite(dbConnection.getUrl());
+                }
+
+                throw new DaoException("Unsupported DB connection type for PATIENT: " + dbConnection.getType());
             }
-            default -> {
-                throw new IllegalArgumentException("Unsupported model type for DB: " + modelType);
-            }
+            default -> throw new IllegalArgumentException("Unsupported model type for DB: " + modelType);
         }
     }
 
     private static <T, ID> IDao<T, ID> createFileDao(ModelType modelType, DataSource dataSource) {
         FileConnection fileConnection = getFileConnection(modelType);
         Map<FileType, File> fileMap = fileConnection.createFileMap();
+
+        // add the file type here and create the correct persistence service
+        // map to the correct modelType => Leistung, Pflegekraft, Patient
         switch (modelType) {
             case LEISTUNG -> {
-                File file = fileMap.get(FileType.CSV);
-                return new LeistungDaoFile(, file);
+
             }
             case PFLEGEKRAFT -> {
-                File file = fileMap.get(FileType.PFLEGEKRAFT);
-                if (file == null) {
-                    throw new IllegalArgumentException("No file found for PFLEGEKRAFT in FileConnection");
-                }
-                return new PflegekraftDaoFile(file);
             }
             case PATIENT -> {
-                File file = fileMap.get(FileType.PATIENT);
-                if (file == null) {
-                    throw new IllegalArgumentException("No file found for PATIENT in FileConnection");
-                }
-                return new PatientDaoFile(file);
             }
-            default -> {
-                throw new IllegalArgumentException("Unsupported model type for FILE: " + modelType);
-            }
+            default -> throw new IllegalArgumentException("Unsupported model type for FILE: " + modelType);
         }
     }
 
