@@ -1,57 +1,47 @@
 package patientenverwaltung.datalayer.services;
 
-import javax.sql.DataSource;
-
-import patientenverwaltung.configuration.exceptions.ConfigurationException;
 import patientenverwaltung.configuration.models.Configuration;
-import patientenverwaltung.configuration.services.ConfigurationPersistenceService;
+import patientenverwaltung.configuration.models.DataSource;
+import patientenverwaltung.configuration.models.DataSources;
+import patientenverwaltung.configuration.models.enums.ModelType;
 import patientenverwaltung.datalayer.dataaccessobjects.IDao;
 
 public class DataLayerFactory {
 
     private static Configuration config;
 
-    public static IDataLayer createDataLayer() {
-        if (config == null) {
-            try {
-                config = ConfigurationPersistenceService.getInstance().getConfiguration();
-            } catch (ConfigurationException e) {
-                throw new RuntimeException("Failed to load configuration: " + e.getMessage(), e);
-            }
+    public static IDataLayer createDataLayer(Configuration configuration) {
+        config = configuration;
+
+        DataLayer dataLayer = new DataLayer();
+        dataLayer.setDaoLeistung(createDao(ModelType.LEISTUNG));
+        dataLayer.setDaoPflegekraft(createDao(ModelType.PFLEGEKRAFT));
+        dataLayer.setDaoPatient(createDao(ModelType.PATIENT));
+
+        return dataLayer;
+    }
+
+    private static <T, ID> IDao<T, ID> createDao(ModelType modelType) {
+        DataSources dataSources = config.getDataSources();
+        DataSource dataSource = dataSources.createDataSourceMap().get(modelType);
+
+        if (dataSource == null) {
+            throw new IllegalArgumentException("No DataSource found for model type: " + modelType);
         }
 
-        return null;
+        return switch (dataSource.getSource()) {
+            case DB -> createDbDao(modelType, dataSource);
+            case FILE -> createFileDao(modelType, dataSource);
+        };
     }
 
-    private static <T, ID> IDao<T, ID> createDao(Class<T> modelType) {
-        // Logic to create and return the appropriate DAO based on the entity class
-        // This is a placeholder; actual implementation will depend on the specific DAOs available
-        return null; // Replace with actual DAO creation logic
+    private static <T, ID> IDao<T, ID> createDbDao(ModelType modelType, DataSource dataSource) {
+
     }
 
-    private static <T, ID> IDao<T, ID> createDBDao(Class<T> modelType, DataSource dataSource) {
-        // Logic to create and return the appropriate DAO based on the entity class and type
-        // This is a placeholder; actual implementation will depend on the specific DAOs available
-        return null; // Replace with actual DAO creation logic
-    }
+    private static <T, ID> IDao<T, ID> createFileDao(ModelType modelType, DataSource dataSource) {
 
-    private static <T, ID> IDao<T, ID> createFileDao(Class<T> modelType, DataSource dataSource) {
-        // Logic to create and return the appropriate DAO based on the entity class and type
-        // This is a placeholder; actual implementation will depend on the specific DAOs available
-        return null; // Replace with actual DAO creation logic
     }
-
-    public static DataSource getDataSource() {
-        if (config == null) {
-            try {
-                config = ConfigurationPersistenceService.getInstance().getConfiguration();
-            } catch (ConfigurationException e) {
-                throw new RuntimeException("Failed to load configuration: " + e.getMessage(), e);
-            }
-        }
-        return config.getDataSource();
-    }
-
 
 
 }
