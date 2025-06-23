@@ -13,11 +13,11 @@ import patientenverwaltung.datalayer.dataaccessobjects.db.services.ConnectionMan
 import patientenverwaltung.datalayer.dataaccessobjects.db.services.ConnectionManagerSqlite;
 import patientenverwaltung.datalayer.exceptions.DaoException;
 
-public abstract class AbstractIDaoSqlite<T, ID> implements IDao<T, ID> {
+public abstract class AbstractDaoSqlite<T, ID> implements IDao<T, ID> {
 
     protected final ConnectionManager connectionManager;
 
-    public AbstractIDaoSqlite(String url) throws DaoException {
+    public AbstractDaoSqlite(String url) throws DaoException {
         this.connectionManager = new ConnectionManagerSqlite(url);
         createTableIfNotExists();
     }
