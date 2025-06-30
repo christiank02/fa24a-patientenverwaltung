@@ -30,6 +30,10 @@ public abstract class ConnectionManager {
     }
 
     public Connection getNewConnection() throws DaoException {
+        if (Objects.nonNull(existingConnection)) {
+            return existingConnection;
+        }
+
         if(Objects.isNull(connectionString)) {
             throw new DaoException("No connection string provided!");
         }

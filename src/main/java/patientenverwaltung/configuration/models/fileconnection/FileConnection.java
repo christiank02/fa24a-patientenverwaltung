@@ -23,9 +23,4 @@ public class FileConnection {
     public List<File> getFileList() {
         return fileList;
     }
-
-    public Map<FileType, File> createFileMap() {
-        return fileList.stream()
-                .collect(Collectors.toMap(File::getType, file -> file));
-    }
 }

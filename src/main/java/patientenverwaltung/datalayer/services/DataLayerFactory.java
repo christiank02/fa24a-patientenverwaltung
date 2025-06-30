@@ -1,7 +1,5 @@
 package patientenverwaltung.datalayer.services;
 
-import java.util.Map;
-
 import patientenverwaltung.configuration.models.Configuration;
 import patientenverwaltung.configuration.models.DataSource;
 import patientenverwaltung.configuration.models.DataSources;
@@ -19,7 +17,21 @@ import patientenverwaltung.datalayer.dataaccessobjects.db.daos.LeistungDaoSqlite
 import patientenverwaltung.datalayer.dataaccessobjects.db.daos.PatientDaoSqlite;
 import patientenverwaltung.datalayer.dataaccessobjects.db.daos.PflegekraftDaoSqlite;
 import patientenverwaltung.datalayer.dataaccessobjects.file.daos.AbstractDaoFile;
+import patientenverwaltung.datalayer.dataaccessobjects.file.daos.LeistungDaoFile;
+import patientenverwaltung.datalayer.dataaccessobjects.file.daos.PatientDaoFile;
+import patientenverwaltung.datalayer.dataaccessobjects.file.daos.PflegekraftDaoFile;
+import patientenverwaltung.datalayer.dataaccessobjects.file.services.FilePersistenceService;
+import patientenverwaltung.datalayer.dataaccessobjects.file.services.FilePersistenceServiceCsv;
+import patientenverwaltung.datalayer.dataaccessobjects.file.services.FilePersistenceServiceXml;
 import patientenverwaltung.datalayer.exceptions.DaoException;
+import patientenverwaltung.models.Leistung;
+import patientenverwaltung.models.Patient;
+import patientenverwaltung.models.Pflegekraft;
+
+import java.net.URI;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 
 public class DataLayerFactory {
 
@@ -41,7 +53,7 @@ public class DataLayerFactory {
 
         return switch (dataSource.getSource()) {
             case DB -> createDbDao(modelType, dataSource);
-            case FILE -> createFileDao(modelType, dataSource);
+            case FILE -> createFileDao(modelType);
         };
     }
 
@@ -74,19 +86,92 @@ public class DataLayerFactory {
         }
     }
 
-    private static <T, ID> IDao<T, ID> createFileDao(ModelType modelType, DataSource dataSource) {
+    private static <T, ID> IDao<T, ID> createFileDao(ModelType modelType) throws DaoException {
         FileConnection fileConnection = getFileConnection(modelType);
-        Map<FileType, File> fileMap = fileConnection.createFileMap();
+        List<File> fileList = fileConnection.getFileList();
 
-        // add the file type here and create the correct persistence service
-        // map to the correct modelType => Leistung, Pflegekraft, Patient
         switch (modelType) {
             case LEISTUNG -> {
+                Optional<LeistungDaoFile> daoFile = fileList.stream()
+                        .filter(file -> file.getType().equals(FileType.CSV) || file.getType().equals(FileType.XML))
+                        .map(file -> {
+                            Path filePath = Path.of(URI.create(file.getValue()));
+                            switch (file.getType()) {
+                                case FileType.CSV -> {
+                                    FilePersistenceService<Leistung> filePersistenceService = new FilePersistenceServiceCsv<>(',');
+                                    return new LeistungDaoFile(filePersistenceService, filePath);
+                                }
+                                case FileType.XML -> {
+                                    FilePersistenceService<Leistung> filePersistenceService = new FilePersistenceServiceXml<>();
+                                    return new LeistungDaoFile(filePersistenceService, filePath);
+                                }
+                            }
+                            return null;
+                        })
+                        .reduce((leistungDaoFile, leistungDaoFile2) -> {
+                            leistungDaoFile2.read().forEach(leistungDaoFile::create);
+                            return leistungDaoFile;
+                        });
+                if (daoFile.isPresent()) {
+                    return (AbstractDaoFile<T, ID>) daoFile.get();
+                }
+                throw new DaoException("Unsupported file type for LEISTUNG: " + modelType);
 
             }
             case PFLEGEKRAFT -> {
+                Optional<PflegekraftDaoFile> daoFile = fileList.stream()
+                        .filter(file -> file.getType().equals(FileType.CSV) || file.getType().equals(FileType.XML))
+                        .map(file -> {
+                            Path filePath = Path.of(URI.create(file.getValue()));
+                            switch (file.getType()) {
+                                case FileType.CSV -> {
+                                    FilePersistenceService<Pflegekraft> filePersistenceService = new FilePersistenceServiceCsv<>(',');
+                                    return new PflegekraftDaoFile(filePersistenceService, filePath);
+                                }
+                                case FileType.XML -> {
+                                    FilePersistenceService<Pflegekraft> filePersistenceService = new FilePersistenceServiceXml<>();
+                                    return new PflegekraftDaoFile(filePersistenceService, filePath);
+                                }
+                            }
+                            return null;
+                        })
+                        .reduce((leistungDaoFile, leistungDaoFile2) -> {
+                            leistungDaoFile2.read().forEach(leistungDaoFile::create);
+                            return leistungDaoFile;
+                        });
+                if (daoFile.isPresent()) {
+                    return (AbstractDaoFile<T, ID>) daoFile.get();
+                }
+                throw new DaoException("Unsupported file type for PFLEGEKRAFT: " + modelType);
+
             }
+
             case PATIENT -> {
+                Optional<PatientDaoFile> daoFile = fileList.stream()
+                        .filter(file -> file.getType().equals(FileType.CSV) || file.getType().equals(FileType.XML))
+                        .map(file -> {
+                            Path filePath = Path.of(URI.create(file.getValue()));
+                            switch (file.getType()) {
+                                case FileType.CSV -> {
+                                    FilePersistenceService<Patient> filePersistenceService = new FilePersistenceServiceCsv<>(',');
+                                    return new PatientDaoFile(filePersistenceService, filePath);
+                                }
+                                case FileType.XML -> {
+                                    FilePersistenceService<Patient> filePersistenceService = new FilePersistenceServiceXml<>();
+                                    return new PatientDaoFile(filePersistenceService, filePath);
+                                }
+                            }
+                            return null;
+                        })
+                        .reduce((leistungDaoFile, leistungDaoFile2) -> {
+                            leistungDaoFile2.read().forEach(leistungDaoFile::create);
+                            return leistungDaoFile;
+                        });
+                if (daoFile.isPresent()) {
+                    return (AbstractDaoFile<T, ID>) daoFile.get();
+                }
+                throw new DaoException("Unsupported file type for PATIENT: " + modelType);
+
             }
             default -> throw new IllegalArgumentException("Unsupported model type for FILE: " + modelType);
         }
