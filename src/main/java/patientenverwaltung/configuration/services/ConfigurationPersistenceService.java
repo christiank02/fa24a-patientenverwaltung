@@ -13,11 +13,12 @@ import patientenverwaltung.configuration.models.Configuration;
 public class ConfigurationPersistenceService {
 
     private static ConfigurationPersistenceService instance;
-    private final String filePath = "config.ser";
+
+    private final String filePath = "config/configuration.conf";
     private Configuration configuration;
 
     private ConfigurationPersistenceService() throws ConfigurationException {
-        this.configuration = readFile();
+
     }
 
     public static ConfigurationPersistenceService getInstance() throws ConfigurationException {

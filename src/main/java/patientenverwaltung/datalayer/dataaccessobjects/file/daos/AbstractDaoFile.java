@@ -9,14 +9,14 @@ import patientenverwaltung.datalayer.dataaccessobjects.IDao;
 import patientenverwaltung.datalayer.dataaccessobjects.file.services.FilePersistenceService;
 import patientenverwaltung.datalayer.exceptions.DaoException;
 
-public abstract class AbstractIDaoFile<T, ID> implements IDao<T, ID> {
+public abstract class AbstractDaoFile<T, ID> implements IDao<T, ID> {
 
     protected final FilePersistenceService<T> filePersistenceService;
     protected final Class<T> objectType;
     protected final Path filePath;
     protected List<T> cachedObjectList;
 
-    public AbstractIDaoFile(FilePersistenceService<T> filePersistenceService, Class<T> objectType, Path filePath) {
+    public AbstractDaoFile(FilePersistenceService<T> filePersistenceService, Class<T> objectType, Path filePath) {
         this.filePersistenceService = filePersistenceService;
         this.objectType = objectType;
         this.filePath = filePath;

@@ -1,16 +1,23 @@
 package patientenverwaltung.configuration.models;
 
-import javax.sql.DataSource;
-
 public class Configuration {
 
-    private DataSource dataSource;
+    private Connections connections;
+    private DataSources dataSources;
 
-    public DataSource getDataSource() {
-        return dataSource;
+    public Connections getConnections() {
+        return connections;
     }
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public void setConnections(Connections connections) {
+        this.connections = connections;
+    }
+
+    public DataSources getDataSources() {
+        return dataSources;
+    }
+
+    public void setDataSources(DataSources dataSources) {
+        this.dataSources = dataSources;
     }
 }
