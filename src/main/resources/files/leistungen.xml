@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="leistungen.xsd">
+    <leistung lkNr="1">
+        <bezeichnung>Kleine Körperpflege</bezeichnung>
+        <beschreibung>Waschen, Mundpflege, Kämmen, An-/Auskleiden, Teilwaschung</beschreibung>
+    </leistung>
+    <leistung lkNr="2">
+        <bezeichnung>Große Körperpflege</bezeichnung>
+        <beschreibung>Duschen, Baden, Ganzkörperwäsche, Rasur, Hautpflege</beschreibung>
+    </leistung>
+    <leistung lkNr="3">
+        <bezeichnung>Lagern / Mobilisation</bezeichnung>
+        <beschreibung>Hilfe beim Umlagern, Positionswechsel, Unterstützung beim Gehen oder Stehen</beschreibung>
+    </leistung>
+    <leistung lkNr="4">
+        <bezeichnung>Hilfe bei der Ernährung</bezeichnung>
+        <beschreibung>Zubereitung von Essen, Hilfe beim Essen und Trinken, Anreichen von Nahrung</beschreibung>
+    </leistung>
+    <leistung lkNr="5">
+        <bezeichnung>Medikamentengabe</bezeichnung>
+        <beschreibung>Vorbereiten, Verabreichen und Dokumentieren von Medikamenten</beschreibung>
+    </leistung>
+    <leistung lkNr="6">
+        <bezeichnung>Kompressionsstrümpfe an- und ausziehen</bezeichnung>
+        <beschreibung>Hilfe beim An- und Ausziehen von Kompressionsstrümpfen</beschreibung>
+    </leistung>
+    <leistung lkNr="7">
+        <bezeichnung>Dekubitusprophylaxe / Behandlung</bezeichnung>
+        <beschreibung>Lagerung, Hautpflege, Wundversorgung bei Druckgeschwüren</beschreibung>
+    </leistung>
+    <leistung lkNr="8">
+        <bezeichnung>Reinigung der Wohnung</bezeichnung>
+        <beschreibung>Staubsaugen, Wischen, Aufräumen – nur für die benutzten Räume des Pflegebedürftigen</beschreibung>
+    </leistung>
+    <leistung lkNr="9">
+        <bezeichnung>Einkaufen</bezeichnung>
+        <beschreibung>Lebensmittel, Apothekenbesuche, max. 2-mal pro Woche mit begrenzter Zeitdauer</beschreibung>
+    </leistung>
+    <leistung lkNr="10">
+        <bezeichnung>Wäsche waschen / Bügeln</bezeichnung>
+        <beschreibung>Waschen und Bügeln der Wäsche des Pflegebedürftigen</beschreibung>
+    </leistung>
+    <leistung lkNr="11">
+        <bezeichnung>Begleitung zu Arztbesuchen oder Behördengängen</bezeichnung>
+        <beschreibung>Hilfe bei Terminen und Begleitung außerhalb der Wohnung</beschreibung>
+    </leistung>
+    <leistung lkNr="12">
+        <bezeichnung>Betreuung</bezeichnung>
+        <beschreibung>Vorlesen, Spiele, Gespräche zur Förderung der geistigen Aktivität</beschreibung>
+    </leistung>
+    <leistung lkNr="13">
+        <bezeichnung>Hilfe bei der Orientierung und Alltagsstrukturierung</bezeichnung>
+        <beschreibung>Unterstützung bei der Tagesstrukturierung</beschreibung>
+    </leistung>
+    <leistung lkNr="14">
+        <bezeichnung>Nachtpflege oder Betreuung in besonderen Situationen</bezeichnung>
+        <beschreibung>Pflege oder Betreuung während der Nachtstunden</beschreibung>
+    </leistung>
+    <leistung lkNr="15">
+        <bezeichnung>Verhinderungspflege</bezeichnung>
+        <beschreibung>Ersatzpflege für Angehörige, die vorübergehend verhindert sind – z. B. Urlaub, Krankheit
+        </beschreibung>
+    </leistung>
+    <leistung lkNr="16">
+        <bezeichnung>Unterstützung bei der Kommunikation</bezeichnung>
+        <beschreibung>Telefonieren, Briefe schreiben, Hilfestellung bei technischen Geräten</beschreibung>
+    </leistung>
+</items>

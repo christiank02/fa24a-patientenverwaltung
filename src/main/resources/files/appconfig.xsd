@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Definiert die möglichen Werte für das source-Type-Attribut -->
+    <xs:simpleType name="SourceTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="db"/>
+            <xs:enumeration value="file"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Definiert die möglichen Werte für das dbConnection-Type-Attribut -->
+    <xs:simpleType name="DbConnectionTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="sqlite"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Definiert die möglichen Werte für das file-Type-Attribut -->
+    <xs:simpleType name="FileTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="csv"/>
+            <xs:enumeration value="xml"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Definiert die möglichen Werte für das connection-Type-Attribut -->
+    <xs:simpleType name="ConnectionTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="sqlite"/>
+            <xs:enumeration value="xml"/>
+            <xs:enumeration value="csv"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Definiert die möglichen Werte für das model-Attribut -->
+    <xs:simpleType name="ModelTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="patient"/>
+            <xs:enumeration value="pflegekraft"/>
+            <xs:enumeration value="behandlung"/>
+            <xs:enumeration value="leistung"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Definition für dbConnection -->
+    <xs:complexType name="DbConnectionType">
+        <xs:sequence>
+            <xs:element name="url" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="DbConnectionTypeEnum" use="required"/>
+    </xs:complexType>
+
+    <!-- Definition für dbConnections -->
+    <xs:complexType name="DbConnectionsType">
+        <xs:sequence>
+            <xs:element name="dbConnection" maxOccurs="unbounded" type="DbConnectionType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definition für file -->
+    <xs:complexType name="FileType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="FileTypeEnum" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Definition der fileConnection als Element, damit die Einzigartigkeit des Keys pro fileConnection-Element geprüft wird.
+           Wäre die fileConnection als ComplexType definiert, würde die Einzigartigkeit des Keys über alle fileConnection-Elemente geprüft.-->
+    <xs:element name="fileConnection">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="file" maxOccurs="unbounded" type="FileType"/>
+            </xs:sequence>
+            <xs:attribute name="model" type="ModelTypeEnum" use="required"/>
+        </xs:complexType>
+        <!-- Nur für ein fileConnection-Element eindeutige Keys -->
+        <xs:key name="fileConnectionType">
+            <xs:selector xpath="file" />
+            <xs:field xpath="@type" />
+        </xs:key>
+    </xs:element>
+
+    <!-- Definition für fileConnections -->
+    <xs:complexType name="FileConnectionsType">
+        <xs:sequence>
+            <xs:element ref="fileConnection" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definition für connections -->
+    <xs:complexType name="ConnectionsType">
+        <xs:sequence>
+            <xs:element name="dbConnections" type="DbConnectionsType"/>
+            <xs:element name="fileConnections" type="FileConnectionsType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definition für dataSource -->
+    <xs:complexType name="DataSourceType">
+        <xs:attribute name="model" type="ModelTypeEnum" use="required"/>
+        <xs:attribute name="source" type="SourceTypeEnum" use="required"/>
+        <xs:attribute name="type" type="ConnectionTypeEnum" use="required"/>
+    </xs:complexType>
+
+    <!-- Definition für dataSources -->
+    <xs:complexType name="DataSourcesType">
+        <xs:sequence>
+            <xs:element name="dataSource" type="DataSourceType" minOccurs="4" maxOccurs="4"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Wurzelelement -->
+    <xs:element name="configuration">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="connections" type="ConnectionsType"/>
+                <xs:element name="dataSources" type="DataSourcesType"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- Dokumentweit eindeutige Keys auf den angegebenen Pfaden -->
+        <xs:key name="dbConnectionType">
+            <xs:selector xpath="connections/dbConnections/dbConnection" />
+            <xs:field xpath="@type" />
+        </xs:key>
+        <xs:key name="fileConnectionModel">
+            <xs:selector xpath="connections/fileConnections/fileConnection" />
+            <xs:field xpath="@model" />
+        </xs:key>
+        <xs:key name="dataSource">
+            <xs:selector xpath="dataSources/dataSource" />
+            <xs:field xpath="@model" />
+        </xs:key>
+    </xs:element>
+</xs:schema>

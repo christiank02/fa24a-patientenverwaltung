@@ -17,8 +17,7 @@ public class Application {
     }
 
     private void loadConfiguration() {
-        // Logic to load configuration settings
-        System.out.println("Loading configuration...");
+        
     }
 
     private void initializeDataAccessLayer() {
