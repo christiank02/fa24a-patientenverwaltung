@@ -1,16 +1,14 @@
 package patientenverwaltung;
 
-import patientenverwaltung.configuration.models.Configuration;
-import patientenverwaltung.configuration.services.ConfigurationPersistenceService;
+import patientenverwaltung.datalayer.exceptions.DaoException;
+import patientenverwaltung.datalayer.services.DataLayerFactory;
+import patientenverwaltung.datalayer.services.DataLayerManager;
 
 public class Application {
 
     public void start() {
         // Initialize the application components
         System.out.println("Starting the Patientenverwaltung application...");
-
-        // Load configuration
-        Configuration configuration = loadConfiguration();
 
         // Initialize data access layer
         initializeDataAccessLayer();
@@ -19,13 +17,12 @@ public class Application {
         startUserInterface();
     }
 
-    private Configuration loadConfiguration() {
-        return ConfigurationPersistenceService.getInstance().getConfiguration();
-    }
-
     private void initializeDataAccessLayer() {
-        // Logic to initialize data access layer
-        System.out.println("Initializing data access layer...");
+        try {
+            DataLayerManager.getInstance().getDataLayer();
+        } catch (DaoException e) {
+            System.out.println("Error initializing data layer: " + e.getMessage());
+        }
     }
 
     private void startUserInterface() {

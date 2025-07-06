@@ -5,24 +5,24 @@
 
         <dbConnections>
             <dbConnection type="sqlite">
-                <url>06_Patientenverwaltung/resources/files/Patientenverwaltung.db3</url>
+                <url>/resources/files/Patientenverwaltung.db3</url>
             </dbConnection>
         </dbConnections>
 
         <fileConnections>
             <fileConnection model="patient">
-                <file type="xml">06_Patientenverwaltung/resources/files/patienten.xml</file>
-                <file type="csv">06_Patientenverwaltung/resources/files/patienten.csv</file>
+                <file type="xml">src/main/resources/files/patienten.xml</file>
+                <file type="csv">src/main/resources/files/patienten.csv</file>
             </fileConnection>
             <fileConnection model="pflegekraft">
-                <file type="xml">06_Patientenverwaltung/resources/files/pflegekraefte.xml</file>
+                <file type="xml">src/main/resources/files/pflegekraefte.xml</file>
             </fileConnection>
             <fileConnection model="behandlung">
-                <file type="xml">06_Patientenverwaltung/resources/files/behandlungen.xml</file>
+                <file type="xml">src/main/resources/files/behandlungen.xml</file>
             </fileConnection>
             <fileConnection model="leistung">
-                <file type="xml">06_Patientenverwaltung/resources/files/leistungen.xml</file>
-                <file type="csv">06_Patientenverwaltung/resources/files/leistungen.csv</file>
+                <file type="xml">src/main/resources/files/leistungen.xml</file>
+                <file type="csv">src/main/resources/files/leistungen.csv</file>
             </fileConnection>
         </fileConnections>
 
