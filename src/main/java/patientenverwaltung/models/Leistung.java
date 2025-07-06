@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.*;
 public class Leistung {
 
     @XmlAttribute(name = "lkNr")
-    @CsvBindByName(column = "lkNr")
+    @CsvBindByName(column = "LK-Nummer")
     private String lkNr;
 
     @XmlElement(name = "bezeichnung")

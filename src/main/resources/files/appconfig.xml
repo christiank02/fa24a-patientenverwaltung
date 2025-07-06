@@ -5,7 +5,7 @@
 
         <dbConnections>
             <dbConnection type="sqlite">
-                <url>/resources/files/Patientenverwaltung.db3</url>
+                <url>src/main/resources/files/Patientenverwaltung.db3</url>
             </dbConnection>
         </dbConnections>
 

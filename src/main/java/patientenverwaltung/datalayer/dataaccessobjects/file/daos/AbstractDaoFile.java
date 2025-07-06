@@ -88,6 +88,9 @@ public abstract class AbstractDaoFile<T, ID> implements IDao<T, ID> {
     }
 
     private boolean hasMatchingId(T object, ID id) {
+        if(object == null || id == null) {
+            return false;
+        }
         return getIdFromObject(object).equals(id);
     }
 
