@@ -32,7 +32,7 @@ public class Application {
         leistung.setBeschreibung(leistung.getBeschreibung() + " - Test");
         dataLayer.getDaoLeistung().update(leistung);
         Leistung updatedLeistung = dataLayer.getDaoLeistung().read(leistung.getLkNr());
-        System.out.println("Leistung: " + leistung.getLkNr() + ", Bezeichnung: " + leistung.getBezeichnung() + ", Beschreibung: " +  leistung.getBeschreibung());
+        System.out.println("Leistung: " + updatedLeistung.getLkNr() + ", Bezeichnung: " + updatedLeistung.getBezeichnung() + ", Beschreibung: " +  updatedLeistung.getBeschreibung());
     }
 
 }
