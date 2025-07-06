@@ -60,8 +60,7 @@ public class DataLayerFactory {
         DbConnection dbConnection = getDbConnection(dbConnectionType);
         String dbUrl = dbConnection.getUrl();
 
-        if (Objects.requireNonNull(dbConnection.getType()) == DbConnectionType.sqlite) {// Implement database-specific DAO creation logic here
-            System.out.println("Creating DAO for DB type: " + dbConnection.getType());
+        if (Objects.requireNonNull(dbConnection.getType()) == DbConnectionType.sqlite) {
             switch (modelType) {
                 case leistung -> {
                     return (AbstractDaoSqlite<T, ID>) new LeistungDaoSqlite(dbUrl);
@@ -87,7 +86,6 @@ public class DataLayerFactory {
                 .orElseThrow(() -> new DaoException("File connection not found for type: " + fileType));
         String filePath = daoFile.getValue();
 
-        System.out.println("Creating DAO for File type: " + fileType + " with file: " + daoFile.getValue());
         switch (daoFile.getType()) {
             case xml -> {
                 switch (modelType) {

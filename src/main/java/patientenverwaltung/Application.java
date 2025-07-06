@@ -15,10 +15,8 @@ import java.util.List;
 public class Application {
 
     public void start() {
-        // Initialize the application components
         try {
             IDataLayer dataLayer = DataLayerManager.getInstance().getDataLayer();
-            // Start the user interface
             startUserInterface(dataLayer);
         } catch (DaoException e) {
             System.out.println("Error initializing data layer: " + e.getMessage());
