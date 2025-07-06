@@ -15,7 +15,7 @@ public class FilePersistenceServiceXml<T> implements FilePersistenceService<T> {
     public List<T> readFile(Class<T> classType, Path filePath) {
         List<T> items = new ArrayList<>();
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(classType);
+            JAXBContext jaxbContext = JAXBContext.newInstance(XmlWrapper.class, classType);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             XmlWrapper<T> wrapper = (XmlWrapper<T>) unmarshaller.unmarshal(filePath.toFile());
             if(wrapper.getItems() != null) {

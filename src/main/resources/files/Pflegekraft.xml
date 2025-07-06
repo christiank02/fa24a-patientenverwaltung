@@ -1,6 +1,21 @@
-<pflegekraft>
-    <id>1</id>
-    <vorname>Max</vorname>
-    <nachname>Mustermann</nachname>
-    <telefon>0123456789</telefon>
-</pflegekraft>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <pflegekraft>
+        <id>1</id>
+        <vorname>Erika</vorname>
+        <nachname>Musterfrau</nachname>
+        <telefon>9876543210</telefon>
+    </pflegekraft>
+    <pflegekraft>
+        <id>2</id>
+        <vorname>Hans</vorname>
+        <nachname>Schmidt - Updated</nachname>
+        <telefon>1234567890</telefon>
+    </pflegekraft>
+    <pflegekraft>
+        <id>3</id>
+        <vorname>Max</vorname>
+        <nachname>Mustermann - Updated</nachname>
+        <telefon>0123456789</telefon>
+    </pflegekraft>
+</items>

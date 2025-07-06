@@ -1,17 +1,17 @@
-LK-Nummer;bezeichnung;beschreibung
-;Lagern / Mobilisation;Hilfe beim Umlagern, Positionswechsel, Unterstützung beim Gehen oder Stehen
-;Hilfe bei der Ernährung;Zubereitung von Essen, Hilfe beim Essen und Trinken, Anreichen von Nahrung
-;Medikamentengabe;Vorbereiten, Verabreichen und Dokumentieren von Medikamenten
-;Kompressionsstrümpfe an- und ausziehen;Hilfe beim An- und Ausziehen von Kompressionsstrümpfen
-;Dekubitusprophylaxe / Behandlung;Lagerung, Hautpflege, Wundversorgung bei Druckgeschwüren
-;Reinigung der Wohnung;Staubsaugen, Wischen, Aufräumen – nur für die benutzten Räume des Pflegebedürftigen
-;Einkaufen;Lebensmittel, Apothekenbesuche, max. 2-mal pro Woche mit begrenzter Zeitdauer
-;Wäsche waschen / Bügeln;Waschen und Bügeln der Wäsche des Pflegebedürftigen
-;Begleitung zu Arztbesuchen oder Behördengängen;Hilfe bei Terminen und Begleitung außerhalb der Wohnung
-;Betreuung;Vorlesen, Spiele, Gespräche zur Förderung der geistigen Aktivität
-;Hilfe bei der Orientierung und Alltagsstrukturierung;Unterstützung bei der Tagesstrukturierung
-;Nachtpflege oder Betreuung in besonderen Situationen;Pflege oder Betreuung während der Nachtstunden
-;Verhinderungspflege;Ersatzpflege für Angehörige, die vorübergehend verhindert sind – z. B. Urlaub, Krankheit
-;Unterstützung bei der Kommunikation;Telefonieren, Briefe schreiben, Hilfestellung bei technischen Geräten
-;Kleine Körperpflege;Waschen, Mundpflege, Kämmen, An-/Auskleiden, Teilwaschung - Test
-;Große Körperpflege;Duschen, Baden, Ganzkörperwäsche, Rasur, Hautpflege - Test
+lkNr;bezeichnung;beschreibung
+14;Lagern / Mobilisation;Hilfe beim Umlagern, Positionswechsel, Unterstützung beim Gehen oder Stehen
+15;Hilfe bei der Ernährung;Zubereitung von Essen, Hilfe beim Essen und Trinken, Anreichen von Nahrung
+16;Medikamentengabe;Vorbereiten, Verabreichen und Dokumentieren von Medikamenten
+1;Kompressionsstrümpfe an- und ausziehen;Hilfe beim An- und Ausziehen von Kompressionsstrümpfen
+2;Dekubitusprophylaxe / Behandlung;Lagerung, Hautpflege, Wundversorgung bei Druckgeschwüren
+3;Reinigung der Wohnung;Staubsaugen, Wischen, Aufräumen – nur für die benutzten Räume des Pflegebedürftigen
+4;Einkaufen;Lebensmittel, Apothekenbesuche, max. 2-mal pro Woche mit begrenzter Zeitdauer
+5;Wäsche waschen / Bügeln;Waschen und Bügeln der Wäsche des Pflegebedürftigen
+6;Begleitung zu Arztbesuchen oder Behördengängen;Hilfe bei Terminen und Begleitung außerhalb der Wohnung
+7;Betreuung;Vorlesen, Spiele, Gespräche zur Förderung der geistigen Aktivität
+8;Hilfe bei der Orientierung und Alltagsstrukturierung;Unterstützung bei der Tagesstrukturierung
+9;Nachtpflege oder Betreuung in besonderen Situationen;Pflege oder Betreuung während der Nachtstunden
+10;Verhinderungspflege;Ersatzpflege für Angehörige, die vorübergehend verhindert sind – z. B. Urlaub, Krankheit
+11;Unterstützung bei der Kommunikation;Telefonieren, Briefe schreiben, Hilfestellung bei technischen Geräten
+12;Kleine Körperpflege;Waschen, Mundpflege, Kämmen, An-/Auskleiden, Teilwaschung - Updated
+13;Große Körperpflege;Duschen, Baden, Ganzkörperwäsche, Rasur, Hautpflege - Updated

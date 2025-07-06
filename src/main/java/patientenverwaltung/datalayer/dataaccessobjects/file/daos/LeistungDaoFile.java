@@ -18,6 +18,6 @@ public class LeistungDaoFile extends AbstractDaoFile<Leistung, String> {
 
     @Override
     protected void setIdToObjectToInsert(Leistung objectToInsert) {
-        // Leistung objects already have their ID set, so no action needed here.
+        objectToInsert.setLkNr(getIdFromObject(objectToInsert));
     }
 }

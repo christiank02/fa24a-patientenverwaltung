@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appconfig.xsd">
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsds/appconfig.xsd">
 
     <connections>
 
@@ -15,23 +15,18 @@
                 <file type="csv">src/main/resources/files/patienten.csv</file>
             </fileConnection>
             <fileConnection model="pflegekraft">
-                <file type="xml">src/main/resources/files/pflegekraefte.xml</file>
-            </fileConnection>
-            <fileConnection model="behandlung">
-                <file type="xml">src/main/resources/files/behandlungen.xml</file>
+                <file type="xml">src/main/resources/files/pflegekraft.xml</file>
             </fileConnection>
             <fileConnection model="leistung">
                 <file type="xml">src/main/resources/files/leistungen.xml</file>
                 <file type="csv">src/main/resources/files/leistungen.csv</file>
             </fileConnection>
         </fileConnections>
-
     </connections>
 
     <dataSources>
         <dataSource model="patient" source="db" type="sqlite" />
-        <dataSource model="pflegekraft" source="db" type="sqlite" />
-        <dataSource model="behandlung" source="file" type="xml" />
+        <dataSource model="pflegekraft" source="file" type="xml" />
         <dataSource model="leistung" source="file" type="csv" />
     </dataSources>
 
