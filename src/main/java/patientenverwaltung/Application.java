@@ -1,9 +1,6 @@
 package patientenverwaltung;
 
-import patientenverwaltung.datalayer.dataaccessobjects.file.daos.LeistungDaoFile;
 import patientenverwaltung.datalayer.exceptions.DaoException;
-import patientenverwaltung.datalayer.services.DataLayer;
-import patientenverwaltung.datalayer.services.DataLayerFactory;
 import patientenverwaltung.datalayer.services.DataLayerManager;
 import patientenverwaltung.datalayer.services.IDataLayer;
 import patientenverwaltung.models.Leistung;
@@ -24,16 +21,13 @@ public class Application {
     }
 
     private void startUserInterface(IDataLayer dataLayer) throws DaoException {
-        // Logic to start the user interface
-        System.out.println("Starting user interface...");
-        printLeistungData();
-        printPflegekraftData();
-        printPatientData();
+        printLeistungData(dataLayer);
+        printPflegekraftData(dataLayer);
+        printPatientData(dataLayer);
     }
 
-    private void printLeistungData() throws DaoException {
+    private void printLeistungData(IDataLayer dataLayer) throws DaoException {
         System.out.println("Printing Leistung data...");
-        IDataLayer dataLayer = DataLayerManager.getInstance().getDataLayer();
         List<Leistung> leistungList = dataLayer.getDaoLeistung().read();
         for (Leistung leistung : leistungList) {
             System.out.println("Leistung: " + leistung.getLkNr() + ", Bezeichnung: " + leistung.getBezeichnung() + ", Beschreibung: " +  leistung.getBeschreibung());
@@ -49,9 +43,8 @@ public class Application {
         }
     }
 
-    private void printPflegekraftData() throws DaoException {
+    private void printPflegekraftData(IDataLayer dataLayer) throws DaoException {
         System.out.println("Printing Pflegekraft data...");
-        IDataLayer dataLayer = DataLayerManager.getInstance().getDataLayer();
         List<Pflegekraft> pflegekraftList = dataLayer.getDaoPflegekraft().read();
         for (Pflegekraft pflegekraft : pflegekraftList) {
             System.out.println("Pflegekraft: " + pflegekraft.getId() + ", Name: " + pflegekraft.getNachname() + ", " + pflegekraft.getVorname() + ", Geburtsdatum: " + pflegekraft.getTelefon());
@@ -67,9 +60,8 @@ public class Application {
         }
     }
 
-    private void printPatientData() throws DaoException {
+    private void printPatientData(IDataLayer dataLayer) throws DaoException {
         System.out.println("Printing Patient data...");
-        IDataLayer dataLayer = DataLayerManager.getInstance().getDataLayer();
         List<Patient> patientList = dataLayer.getDaoPatient().read();
         for (Patient patient : patientList) {
             System.out.println("Patient: " + patient.getId() + ", Name: " + patient.getNachname() + ", " + patient.getVorname() + ", Geburtsdatum: " + patient.getGeburtsdatum() + ", Zimmer: " + patient.getZimmer() + ", Pflegegrad: " + patient.getPflegegrad() + ", Vermögen: " + patient.getVermoegen());
