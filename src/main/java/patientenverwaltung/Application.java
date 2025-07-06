@@ -1,5 +1,8 @@
 package patientenverwaltung;
 
+import patientenverwaltung.configuration.models.Configuration;
+import patientenverwaltung.configuration.services.ConfigurationPersistenceService;
+
 public class Application {
 
     public void start() {
@@ -7,7 +10,7 @@ public class Application {
         System.out.println("Starting the Patientenverwaltung application...");
 
         // Load configuration
-        loadConfiguration();
+        Configuration configuration = loadConfiguration();
 
         // Initialize data access layer
         initializeDataAccessLayer();
@@ -16,8 +19,8 @@ public class Application {
         startUserInterface();
     }
 
-    private void loadConfiguration() {
-        
+    private Configuration loadConfiguration() {
+        return ConfigurationPersistenceService.getInstance().getConfiguration();
     }
 
     private void initializeDataAccessLayer() {

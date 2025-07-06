@@ -1,17 +1,22 @@
 package patientenverwaltung.configuration.models.dbconnection;
 
-import patientenverwaltung.configuration.models.enums.ConnectionType;
+import jakarta.xml.bind.annotation.*;
+import patientenverwaltung.configuration.models.enums.DbConnectionType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DbConnection {
 
-    private ConnectionType type;
+    @XmlAttribute
+    private DbConnectionType type;
+
+    @XmlElement(name = "url")
     private String url;
 
-    public ConnectionType getType() {
+    public DbConnectionType getType() {
         return type;
     }
 
-    public void setType(ConnectionType type) {
+    public void setType(DbConnectionType type) {
         this.type = type;
     }
 

@@ -1,10 +1,17 @@
 package patientenverwaltung.configuration.models.fileconnection;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlValue;
 import patientenverwaltung.configuration.models.enums.FileType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class File {
 
-    private String value;
+    @XmlValue
+    private String value; // The file full path
+    @XmlAttribute
     private FileType type;
 
     public String getValue() {

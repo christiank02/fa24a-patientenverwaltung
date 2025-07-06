@@ -41,9 +41,9 @@ public class DataLayerFactory {
         config = configuration;
 
         DataLayer dataLayer = new DataLayer();
-        dataLayer.setDaoLeistung(createDao(ModelType.LEISTUNG));
-        dataLayer.setDaoPflegekraft(createDao(ModelType.PFLEGEKRAFT));
-        dataLayer.setDaoPatient(createDao(ModelType.PATIENT));
+        dataLayer.setDaoLeistung(createDao(ModelType.leistung));
+        dataLayer.setDaoPflegekraft(createDao(ModelType.pflegekraft));
+        dataLayer.setDaoPatient(createDao(ModelType.patient));
 
         return dataLayer;
     }
@@ -52,15 +52,15 @@ public class DataLayerFactory {
         DataSource dataSource = getDataSource(modelType);
 
         return switch (dataSource.getSource()) {
-            case DB -> createDbDao(modelType, dataSource);
-            case FILE -> createFileDao(modelType);
+            case db -> createDbDao(modelType, dataSource);
+            case file -> createFileDao(modelType);
         };
     }
 
     private static <T, ID> IDao<T, ID> createDbDao(ModelType modelType, DataSource dataSource) throws DaoException {
         DbConnection dbConnection = getDbConnection(dataSource);
 
-        switch (modelType) {
+        /*switch (modelType) {
             case LEISTUNG -> {
                 if (dbConnection.getType() == ConnectionType.SQLITE) {
                     return (AbstractDaoSqlite<T, ID>) new LeistungDaoSqlite(dbConnection.getUrl());
@@ -83,7 +83,8 @@ public class DataLayerFactory {
                 throw new DaoException("Unsupported DB connection type for PATIENT: " + dbConnection.getType());
             }
             default -> throw new IllegalArgumentException("Unsupported model type for DB: " + modelType);
-        }
+        }*/
+        return null;
     }
 
     private static <T, ID> IDao<T, ID> createFileDao(ModelType modelType) throws DaoException {
@@ -91,17 +92,17 @@ public class DataLayerFactory {
         List<File> fileList = fileConnection.getFileList();
 
         switch (modelType) {
-            case LEISTUNG -> {
+            case leistung -> {
                 Optional<LeistungDaoFile> daoFile = fileList.stream()
-                        .filter(file -> file.getType().equals(FileType.CSV) || file.getType().equals(FileType.XML))
+                        .filter(file -> file.getType().equals(FileType.csv) || file.getType().equals(FileType.xml))
                         .map(file -> {
                             Path filePath = Path.of(URI.create(file.getValue()));
                             switch (file.getType()) {
-                                case FileType.CSV -> {
+                                case FileType.csv -> {
                                     FilePersistenceService<Leistung> filePersistenceService = new FilePersistenceServiceCsv<>(',');
                                     return new LeistungDaoFile(filePersistenceService, filePath);
                                 }
-                                case FileType.XML -> {
+                                case FileType.xml -> {
                                     FilePersistenceService<Leistung> filePersistenceService = new FilePersistenceServiceXml<>();
                                     return new LeistungDaoFile(filePersistenceService, filePath);
                                 }
@@ -118,17 +119,17 @@ public class DataLayerFactory {
                 throw new DaoException("Unsupported file type for LEISTUNG: " + modelType);
 
             }
-            case PFLEGEKRAFT -> {
+            case pflegekraft -> {
                 Optional<PflegekraftDaoFile> daoFile = fileList.stream()
-                        .filter(file -> file.getType().equals(FileType.CSV) || file.getType().equals(FileType.XML))
+                        .filter(file -> file.getType().equals(FileType.csv) || file.getType().equals(FileType.xml))
                         .map(file -> {
                             Path filePath = Path.of(URI.create(file.getValue()));
                             switch (file.getType()) {
-                                case FileType.CSV -> {
+                                case FileType.csv -> {
                                     FilePersistenceService<Pflegekraft> filePersistenceService = new FilePersistenceServiceCsv<>(',');
                                     return new PflegekraftDaoFile(filePersistenceService, filePath);
                                 }
-                                case FileType.XML -> {
+                                case FileType.xml -> {
                                     FilePersistenceService<Pflegekraft> filePersistenceService = new FilePersistenceServiceXml<>();
                                     return new PflegekraftDaoFile(filePersistenceService, filePath);
                                 }
@@ -146,17 +147,17 @@ public class DataLayerFactory {
 
             }
 
-            case PATIENT -> {
+            case patient -> {
                 Optional<PatientDaoFile> daoFile = fileList.stream()
-                        .filter(file -> file.getType().equals(FileType.CSV) || file.getType().equals(FileType.XML))
+                        .filter(file -> file.getType().equals(FileType.csv) || file.getType().equals(FileType.xml))
                         .map(file -> {
                             Path filePath = Path.of(URI.create(file.getValue()));
                             switch (file.getType()) {
-                                case FileType.CSV -> {
+                                case FileType.csv -> {
                                     FilePersistenceService<Patient> filePersistenceService = new FilePersistenceServiceCsv<>(',');
                                     return new PatientDaoFile(filePersistenceService, filePath);
                                 }
-                                case FileType.XML -> {
+                                case FileType.xml -> {
                                     FilePersistenceService<Patient> filePersistenceService = new FilePersistenceServiceXml<>();
                                     return new PatientDaoFile(filePersistenceService, filePath);
                                 }
