@@ -1,6 +1,5 @@
 package patientenverwaltung.configuration.models;
 
-import patientenverwaltung.configuration.models.dbconnection.DbConnection;
 import patientenverwaltung.configuration.models.dbconnection.DbConnections;
 import patientenverwaltung.configuration.models.fileconnection.FileConnections;
 

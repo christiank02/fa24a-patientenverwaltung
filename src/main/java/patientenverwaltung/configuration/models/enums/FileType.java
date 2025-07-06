@@ -1,21 +1,8 @@
 package patientenverwaltung.configuration.models.enums;
 
+import jakarta.xml.bind.annotation.XmlEnum;
+
+@XmlEnum
 public enum FileType {
-    XML("xml"),
-    CSV("csv");
-
-    private final String fileExtension;
-
-    FileType(String fileExtension) {
-        this.fileExtension = fileExtension;
-    }
-
-    public String getFileExtension() {
-        return fileExtension;
-    }
-
-    @Override
-    public String toString() {
-        return fileExtension;
-    }
+    xml, csv
 }
