@@ -39,11 +39,13 @@ public abstract class ConnectionManager {
         }
 
         try {
+            System.out.println(connectionString);
             Connection con = DriverManager.getConnection(connectionString);
             this.existingConnection = con;
 
             return con;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new DaoException("Could not establish connection to the database!");
         }
     }

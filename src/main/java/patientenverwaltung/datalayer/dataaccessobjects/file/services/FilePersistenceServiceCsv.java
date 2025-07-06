@@ -27,13 +27,13 @@ public class FilePersistenceServiceCsv<T> implements FilePersistenceService<T> {
 
     @Override
     public List<T> readFile(Class<T> classType, Path filePath) {
-        try(Reader reader = new FileReader(filePath.toFile())) {
+        try (Reader reader = new FileReader(filePath.toFile())) {
             CsvToBean<T> csvToBean = new CsvToBeanBuilder<T>(reader)
                     .withType(classType)
                     .withSeparator(separator)
                     .build();
             return csvToBean.parse();
-        }catch(Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -47,7 +47,7 @@ public class FilePersistenceServiceCsv<T> implements FilePersistenceService<T> {
 
         String header = String.join(String.valueOf(separator), columns) + "\n";
 
-        try(Writer writer = new FileWriter(filePath.toFile())) {
+        try (Writer writer = new FileWriter(filePath.toFile())) {
             writer.write(header);
             StatefulBeanToCsv<T> beanToCsv = new StatefulBeanToCsvBuilder<T>(writer)
                     .withSeparator(separator)
@@ -55,15 +55,15 @@ public class FilePersistenceServiceCsv<T> implements FilePersistenceService<T> {
                     .withMappingStrategy(mappingStrategy)
                     .build();
             beanToCsv.write(listToPersist);
-        }catch(Exception e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException("Error writing to CSV file: " + e.getMessage(), e);
         }
     }
 
     private String[] getCsvColumnNames(Class<T> classType) {
         List<String> columnNames = new ArrayList<>();
-        for(Field field : classType.getDeclaredFields()) {
-            if(field.isAnnotationPresent(CsvBindByName.class)) {
+        for (Field field : classType.getDeclaredFields()) {
+            if (field.isAnnotationPresent(CsvBindByName.class)) {
                 CsvBindByName csvBindByName = field.getAnnotation(CsvBindByName.class);
                 columnNames.add(csvBindByName.column());
             }

@@ -108,7 +108,7 @@
     <!-- Definition für dataSources -->
     <xs:complexType name="DataSourcesType">
         <xs:sequence>
-            <xs:element name="dataSource" type="DataSourceType" minOccurs="4" maxOccurs="4"/>
+            <xs:element name="dataSource" type="DataSourceType" minOccurs="3" maxOccurs="3"/>
         </xs:sequence>
     </xs:complexType>
 

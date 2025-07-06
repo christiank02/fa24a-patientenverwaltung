@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appconfig.xsd">
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsds/appconfig.xsd">
 
     <connections>
 
         <dbConnections>
             <dbConnection type="sqlite">
-                <url>06_Patientenverwaltung/resources/files/Patientenverwaltung.db3</url>
+                <url>src/main/resources/files/Patientenverwaltung.db3</url>
             </dbConnection>
         </dbConnections>
 
         <fileConnections>
             <fileConnection model="patient">
-                <file type="xml">06_Patientenverwaltung/resources/files/patienten.xml</file>
-                <file type="csv">06_Patientenverwaltung/resources/files/patienten.csv</file>
+                <file type="xml">src/main/resources/files/patienten.xml</file>
+                <file type="csv">src/main/resources/files/patienten.csv</file>
             </fileConnection>
             <fileConnection model="pflegekraft">
-                <file type="xml">06_Patientenverwaltung/resources/files/pflegekraefte.xml</file>
-            </fileConnection>
-            <fileConnection model="behandlung">
-                <file type="xml">06_Patientenverwaltung/resources/files/behandlungen.xml</file>
+                <file type="xml">src/main/resources/files/pflegekraft.xml</file>
             </fileConnection>
             <fileConnection model="leistung">
-                <file type="xml">06_Patientenverwaltung/resources/files/leistungen.xml</file>
-                <file type="csv">06_Patientenverwaltung/resources/files/leistungen.csv</file>
+                <file type="xml">src/main/resources/files/leistungen.xml</file>
+                <file type="csv">src/main/resources/files/leistungen.csv</file>
             </fileConnection>
         </fileConnections>
-
     </connections>
 
     <dataSources>
         <dataSource model="patient" source="db" type="sqlite" />
-        <dataSource model="pflegekraft" source="db" type="sqlite" />
-        <dataSource model="behandlung" source="file" type="xml" />
+        <dataSource model="pflegekraft" source="file" type="xml" />
         <dataSource model="leistung" source="file" type="csv" />
     </dataSources>
 

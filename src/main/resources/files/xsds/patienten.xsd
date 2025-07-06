@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="items">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="patient" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="vorname" type="xs:string"/>
+                            <xs:element name="nachname" type="xs:string"/>
+                            <xs:element name="geburtsdatum" type="xs:date"/>
+                            <xs:element name="pflegegrad" type="xs:int"/>
+                            <xs:element name="zimmer" type="xs:string"/>
+                            <xs:element name="vermoegen" type="xs:double"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:integer" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

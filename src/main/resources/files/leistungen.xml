@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="leistungen.xsd">
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsds/leistungen.xsd">
     <leistung lkNr="1">
         <bezeichnung>Kleine Körperpflege</bezeichnung>
         <beschreibung>Waschen, Mundpflege, Kämmen, An-/Auskleiden, Teilwaschung</beschreibung>
