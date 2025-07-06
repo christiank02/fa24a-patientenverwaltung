@@ -9,13 +9,13 @@
     <pflegekraft>
         <id>2</id>
         <vorname>Hans</vorname>
-        <nachname>Schmidt - Updated</nachname>
+        <nachname>Schmidt</nachname>
         <telefon>1234567890</telefon>
     </pflegekraft>
     <pflegekraft>
         <id>3</id>
         <vorname>Max</vorname>
-        <nachname>Mustermann - Updated</nachname>
+        <nachname>Mustermann</nachname>
         <telefon>0123456789</telefon>
     </pflegekraft>
 </items>

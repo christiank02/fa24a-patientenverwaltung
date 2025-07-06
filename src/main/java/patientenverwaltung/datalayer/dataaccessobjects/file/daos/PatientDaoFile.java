@@ -17,7 +17,6 @@ public class PatientDaoFile extends AbstractDaoFile<Patient, Long> {
 
     @Override
     protected void setIdToObjectToInsert(Patient objectToInsert) {
-        // Beispiel: Setze neue ID, falls noch nicht gesetzt (Autoincrement)
         if (objectToInsert.getId() == 0L) {
             long maxId = cachedObjectList.stream()
                     .mapToLong(Patient::getId)

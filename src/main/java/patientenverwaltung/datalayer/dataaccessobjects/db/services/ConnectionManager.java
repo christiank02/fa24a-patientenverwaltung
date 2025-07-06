@@ -30,23 +30,21 @@ public abstract class ConnectionManager {
     }
 
     public Connection getNewConnection() throws DaoException {
-        if (Objects.nonNull(existingConnection)) {
-            return existingConnection;
-        }
-
-        if(Objects.isNull(connectionString)) {
-            throw new DaoException("No connection string provided!");
-        }
-
         try {
-            System.out.println(connectionString);
+            if (Objects.nonNull(existingConnection) && !existingConnection.isClosed()) {
+                return existingConnection;
+            }
+
+            if (Objects.isNull(connectionString)) {
+                throw new DaoException("No connection string provided!");
+            }
+
             Connection con = DriverManager.getConnection(connectionString);
             this.existingConnection = con;
 
             return con;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new DaoException("Could not establish connection to the database!");
+            throw new DaoException("Could not establish connection to the database! " + e.getMessage());
         }
     }
 }
