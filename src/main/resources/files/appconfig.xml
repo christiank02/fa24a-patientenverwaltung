@@ -15,11 +15,11 @@
                 <file type="csv">src/main/resources/files/patienten.csv</file>
             </fileConnection>
             <fileConnection model="pflegekraft">
-                <file type="xml">src/main/resources/files/pflegekraft.xml</file>
+                <file type="xml">src/main/resources/files/Pflegekraft.xml</file>
             </fileConnection>
             <fileConnection model="leistung">
                 <file type="xml">src/main/resources/files/leistungen.xml</file>
-                <file type="csv">src/main/resources/files/leistungen.csv</file>
+                <file type="csv">src/main/resources/files/Leistungen.csv</file>
             </fileConnection>
         </fileConnections>
     </connections>
