@@ -6,3 +6,9 @@ target/
 *.db3-journal
 *.db3-wal
 *.db3-shm
+
+# Local environment files
+.env
+.env.*
+!.env.example
+!.env.template
